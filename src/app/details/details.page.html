@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="detail_data.image" />
+    <ion-card-header>
+      <!-- <ion-card-subtitle>Destination</ion-card-subtitle> -->
+      <ion-card-title>{{detail_data.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{detail_data.description}}
+
+      <div><b>Price:</b> {{detail_data.price}} $</div>
+    </ion-card-content>
+
+
+    <section class="text-center">
+      <div class="in-block">
+        <ion-button size="small" color="primary" (click)="CalculateQuantity('100')">$100</ion-button>
+        <ion-button size="small" color="primary" (click)="CalculateQuantity('10')">$10</ion-button>
+        <ion-button size="small" color="primary" (click)="CalculateTotalPrice('5')">5 qty</ion-button>
+        <ion-button size="small" color="primary" (click)="CalculateTotalPrice('10')">10 qty</ion-button>
+      </div>
+    </section>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Amount, $</ion-label>
+          <ion-input [(ngModel)]="amount_price" clear-input="false" (ionBlur)="CalculateQuantity(amount_price)"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label position="stacked">Quantity</ion-label>
+          <ion-input [(ngModel)]="quantity" (ionBlur)="CalculateTotalPrice(quantity)"></ion-input>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+
+  </ion-card>
+</ion-content>
