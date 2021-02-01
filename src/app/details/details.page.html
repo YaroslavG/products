@@ -34,11 +34,11 @@
       <ion-row>
         <ion-col>
           <ion-label position="stacked">Amount, $</ion-label>
-          <ion-input [(ngModel)]="amount_price" clear-input="false" (ionBlur)="CalculateQuantity(amount_price)"></ion-input>
+          <ion-input [(ngModel)]="amount_price" clear-input="false" (ionChange)="CalculateQuantity(amount_price)"></ion-input>
         </ion-col>
         <ion-col>
           <ion-label position="stacked">Quantity</ion-label>
-          <ion-input [(ngModel)]="quantity" (ionBlur)="CalculateTotalPrice(quantity)"></ion-input>
+          <ion-input [(ngModel)]="quantity" (ionChange)="CalculateTotalPrice(quantity)"></ion-input>
         </ion-col>
       </ion-row>
       </ion-grid>

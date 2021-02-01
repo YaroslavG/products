@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductslistService } from '../productslist.service';
 
 @Component({
   selector: 'app-details',
@@ -8,23 +9,34 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 
-export class DetailsPage implements OnInit {
+export class DetailsPage {
   
+  public json_data: any = [];
   public detail_data: any = [];
   public amount_price: string = "";
   public quantity: string = "";
 
-  constructor(private activatedRoute: ActivatedRoute, private router: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private router: ActivatedRoute, private productList: ProductslistService) {
    }
 
-  ngOnInit() {
+   ionViewWillEnter() {
+
     this.activatedRoute.queryParams.subscribe(params => {
-      if (params && params.special) {
-        //store the temp in data
-        this.detail_data = JSON.parse(params.special);
-        // console.log(this.detail_data);
+      if (params && params.sku) {
+        console.log(JSON.parse(params.sku));
+        this.json_data = this.productList.getDataList();
+       this.detail_data = this.getByValue(this.json_data,params.sku);
+       console.log(this.detail_data);
       }
     })
+  }
+
+  getByValue(arr, value) {
+    console.log(arr);
+    for (var i=0, iLen=arr.length; i<iLen; i++) {
+      
+      if (arr[i].sku == value) return arr[i];
+    }
   }
 
   CalculateQuantity(amount) {
